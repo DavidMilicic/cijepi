@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\moguci_datumi;
+use App\Models\zakazani_datumi;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,16 +19,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/', function () {
-    return view('insertDatum');
+#odaziva se ovaj /create
+Route::post('/create', function () {
+    moguci_datumi::create([
+        'datum' => request('datum')
+    ]);
+    return redirect('datumi')->with('success', 'Termin uspješno dodan!');
 });
 
-//auth route for everyone
+Route::post('/createzakazani', function () {
+    zakazani_datumi::create([
+        'datum' => request('datum'),
+        'broj' => request('broj'),
+        'marka' => request('marka')
+    ]);
+    return redirect('datumi')->with('success', 'Termin uspješno zakazan!');
+});
+
+//auth route for everyone - gleda da li su logirani
 Route::group(['middleware' => ['auth']], function() { 
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
-    Route::get('/dashboard/datumi', 'App\Http\Controllers\DashboardController@datumi')->name('dashboard.datumi');
-    Route::get('/dashboard/onama', 'App\Http\Controllers\DashboardController@onama')->name('dashboard.onama');
-    Route::get('/dashboard/kontakt', 'App\Http\Controllers\DashboardController@kontakt')->name('dashboard.kontakt');
+    Route::get('/onama', 'App\Http\Controllers\DashboardController@onama')->name('onama');
+    Route::get('/datumi', 'App\Http\Controllers\DatumiController@datumi')->name('datumi');
+    Route::get('/kontakt', 'App\Http\Controllers\DashboardController@kontakt')->name('kontakt');
 });
 
 require __DIR__.'/auth.php';

@@ -39,16 +39,7 @@ class DashboardController extends Controller
                return view('kontakt');
           }
      }
-     public function datumi()
-     {
-          if (Auth::user()->hasRole('korisnik')) {
-               return view('datumikorisnik');
-          } elseif (Auth::user()->hasRole('doktor')) {
-               return view('datumidoktor');
-          } elseif (Auth::user()->hasRole('admin')) {
-               return view('datumidoktor');
-          }
-     }
+
      public function insertDatum()
      {
           return view('insertDatum');

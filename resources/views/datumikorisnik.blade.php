@@ -8,55 +8,77 @@
     </br>
 
     <section class="max-w-3xl px-6 py-4 mx-auto rounded-md shadow-md bg-gray-100">
-        <div>
-            <p class="text-center text-3xl">Odaberite termin vakciniranja.</p>
-        </div>
 
-        <div class="container px-5 py-4 mx-auto">
-
-            <div class="text-center" inline-datepicker data-date="current_date"></div>
-
-            <div class="text-center py-4">
-
-                <div class="text-center">Odaberite dozu vakcine:</div>
-
-                <!--povlaci podatke sa baze-->
-                <?php $mysql = NEW MySQLi('localhost', 'root', '', 'cijepi') ; #localhost, root, pass, ime baze
-        $resultSet = $mysql->query("SELECT broj FROM broj_doze")
+        <!--povlaci podatke sa baze-->
+        <?php $mysql = new MySQLi('localhost', 'root', '', 'cijepi'); #localhost, root, pass, ime baze
+        $resultSet = $mysql->query("SELECT datum FROM moguci_datumi")
         ?>
-                <select name="broj_doze" class="text-center border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
-
-                <!--Prikazuje podatke iz baze-->
-                <?php 
-            while($rows = $resultSet->fetch_assoc())
-            {
-                $broj = $rows["broj"];
-                echo"<option value='$broj'>$broj</option>";
-            }
-            ?>
-
-                </select>
-            </div>
-            <div class="text-center">
-                <div class="text-center">Odaberite vakcinu:</div>
-
-                <?php $mysql = NEW MySQLi('localhost', 'root', '', 'cijepi') ;
-        $resultSet = $mysql->query("SELECT marka FROM marka_vakcine")
-        ?>
-                <select class="text-center border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
-                <?php 
-            while($rows = $resultSet->fetch_assoc())
-            {
-                $marka = $rows["marka"];
-                echo"<option value='$marka'>$marka</option>";
-            }
-            ?>
-                </select>
+        <form action="/createzakazani" method="post">
+            @csrf
+            <div>
+                <p class="text-center text-3xl">Odaberite termin vakciniranja.</p>
             </div>
             <div class="text-center py-4">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm">Zakaži termin</button>
+                <select name="datum" class="text-center border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                    <!--Prikazuje podatke iz baze-->
+                    <?php
+                    while ($rows = $resultSet->fetch_assoc()) {
+                        $datum = $rows["datum"];
+                        echo "<option value='$datum'>$datum</option>";
+                    }
+                    ?>
+                </select>
             </div>
-        </div>
+
+            <div class="container px-5 mx-auto">
+
+                <div class="text-center">
+
+                    <div class="text-center">Odaberite dozu vakcine:</div>
+
+                    <!--povlaci podatke sa baze-->
+                    <?php $mysql = new MySQLi('localhost', 'root', '', 'cijepi'); #localhost, root, pass, ime baze
+                    $resultSet = $mysql->query("SELECT broj FROM broj_doze")
+                    ?>
+                    <select name="broj" class="text-center border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+
+                        <!--Prikazuje podatke iz baze-->
+                        <?php
+                        while ($rows = $resultSet->fetch_assoc()) {
+                            $broj = $rows["broj"];
+                            echo "<option value='$broj'>$broj</option>";
+                        }
+                        ?>
+
+                    </select>
+                </div>
+                <div class="text-center">
+                    <div class="text-center">Odaberite vakcinu:</div>
+
+                    <?php $mysql = new MySQLi('localhost', 'root', '', 'cijepi');
+                    $resultSet = $mysql->query("SELECT marka FROM marka_vakcine")
+                    ?>
+                    <select name="marka" class="text-center border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                        <?php
+                        while ($rows = $resultSet->fetch_assoc()) {
+                            $marka = $rows["marka"];
+                            echo "<option value='$marka'>$marka</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="text-center py-4">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm">Zakaži termin</button>
+                </div>
+            </div>
+            @if (\Session::has('success'))
+            <div class="alert alert-success text-center">
+                <ul>
+                    <li>{!! \Session::get('success') !!}</li>
+                </ul>
+            </div>
+            @endif
+        </form>
     </section>
     </br>
     <!--Vakcine-->

@@ -17,19 +17,19 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.datumi')" :active="request()->routeIs('dashboard.datumi')">
+                    <x-nav-link :href="route('datumi')" :active="request()->routeIs('datumi')">
                         {{ __('Datumi') }}
                     </x-nav-link>
                 </div>
                 <!--Gleda da li je user korisnik ili admin-->
                 @if (Auth::user()->hasRole(['korisnik', 'admin']))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.onama')" :active="request()->routeIs('dashboard.onama')">
+                    <x-nav-link :href="route('onama')" :active="request()->routeIs('onama')">
                         {{ __('O nama') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.kontakt')" :active="request()->routeIs('dashboard.kontakt')">
+                    <x-nav-link :href="route('kontakt')" :active="request()->routeIs('kontakt')">
                         {{ __('Kontakt') }}
                     </x-nav-link>
                 </div>
@@ -86,19 +86,19 @@
                 </x-responsive-nav-link>
             </div>
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('dashboard.datumi')" :active="request()->routeIs('dashboard.datumi')">
+                <x-responsive-nav-link :href="route('datumi')" :active="request()->routeIs('datumi')">
                     {{ __('Datumi') }}
                 </x-responsive-nav-link>
             </div>
             <!--Gleda da li je user korisnik ili admin-->
             @if (Auth::user()->hasRole(['korisnik', 'admin']))
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('dashboard.onama')" :active="request()->routeIs('dashboard.onama')">
+                <x-responsive-nav-link :href="route('onama')" :active="request()->routeIs('onama')">
                     {{ __('O nama') }}
                 </x-responsive-nav-link>
             </div>
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('dashboard.kontakt')" :active="request()->routeIs('dashboard.kontakt')">
+                <x-responsive-nav-link :href="route('kontakt')" :active="request()->routeIs('kontakt')">
                     {{ __('Kontakt') }}
                 </x-responsive-nav-link>
             </div>

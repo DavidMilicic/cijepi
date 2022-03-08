@@ -17,6 +17,8 @@ class ZakazaniDatumi extends Migration
                 Schema::create('zakazani_datumi', function (Blueprint $table) {
                     $table->bigIncrements('id');
                     $table->date('datum')->unique();
+                    $table->integer('broj');
+                    $table->string('marka');
                     $table->timestamps();
                 });
     }
