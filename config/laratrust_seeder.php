@@ -17,11 +17,11 @@ return [
             'payments' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
-        'doctor' => [
+        'doktor' => [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
-        'user' => [
+        'korisnik' => [
             'profile' => 'r,u',
         ],
     ],
