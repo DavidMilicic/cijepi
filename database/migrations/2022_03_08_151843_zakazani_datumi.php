@@ -13,14 +13,14 @@ class ZakazaniDatumi extends Migration
      */
     public function up()
     {
-                // Create table for zakazani datumi
-                Schema::create('zakazani_datumi', function (Blueprint $table) {
-                    $table->bigIncrements('id');
-                    $table->date('datum')->unique();
-                    $table->integer('broj');
-                    $table->string('marka');
-                    $table->timestamps();
-                });
+        // Create table for zakazani datumi
+        Schema::create('zakazani_datumi', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->date('datum');
+            $table->integer('broj');
+            $table->string('marka');
+            $table->timestamps();
+        });
     }
 
     /**

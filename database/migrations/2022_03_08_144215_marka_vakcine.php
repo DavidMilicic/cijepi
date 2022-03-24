@@ -13,12 +13,12 @@ class MarkaVakcine extends Migration
      */
     public function up()
     {
-                // Create table for marka vakcine
-                Schema::create('marka_vakcine', function (Blueprint $table) {
-                    $table->bigIncrements('id');
-                    $table->string('marka')->unique();
-                    $table->timestamps();
-                });
+        // Create table for marka vakcine
+        Schema::create('marka_vakcine', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('marka');
+            $table->timestamps();
+        });
     }
 
     /**

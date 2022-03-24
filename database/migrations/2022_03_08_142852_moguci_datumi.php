@@ -16,7 +16,7 @@ class MoguciDatumi extends Migration
         // Create table for moguci datumi
         Schema::create('moguci_datumi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('datum')->unique();
+            $table->date('datum');
             $table->timestamps();
         });
     }

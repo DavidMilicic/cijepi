@@ -16,8 +16,4 @@ class DatumiController extends Controller
               return view('datumidoktor');
          }
     }
-    public function update(Request $request)
-    {
-        $request->all(); // here you're acessing all the data you send it
-    }
 }

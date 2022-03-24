@@ -13,12 +13,12 @@ class BrojDoze extends Migration
      */
     public function up()
     {
-                // Create table for broj doze
-                Schema::create('broj_doze', function (Blueprint $table) {
-                    $table->bigIncrements('id');
-                    $table->integer('broj')->unique();
-                    $table->timestamps();
-                });
+        // Create table for broj doze
+        Schema::create('broj_doze', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('broj');
+            $table->timestamps();
+        });
     }
 
     /**

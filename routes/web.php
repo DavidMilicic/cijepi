@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 #odaziva se ovaj /create
-Route::post('/create', function () {
+Route::post('/createmoguci', function () {
     moguci_datumi::create([
         'datum' => request('datum')
     ]);
@@ -35,6 +35,7 @@ Route::post('/createzakazani', function () {
     ]);
     return redirect('datumi')->with('success', 'Termin uspješno zakazan!');
 });
+
 
 //auth route for everyone - gleda da li su logirani
 Route::group(['middleware' => ['auth']], function() { 

@@ -39,9 +39,4 @@ class DashboardController extends Controller
                return view('kontakt');
           }
      }
-
-     public function insertDatum()
-     {
-          return view('insertDatum');
-     }
 }

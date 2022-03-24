@@ -44,6 +44,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
         $user->attachRole('korisnik'); #automatski daje role user - mozemo koristiti i id
         event(new Registered($user));
 
