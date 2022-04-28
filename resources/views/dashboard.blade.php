@@ -16,10 +16,10 @@
                     </svg>Tablica korisnika:</div>
                 <div>
                     @php
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "cijepi";
+                    $servername = $_ENV["DB_HOST"];
+                    $username = $_ENV["DB_USERNAME"];
+                    $password = $_ENV["DB_PASSWORD"];
+                    $dbname = $_ENV["DB_DATABASE"];
 
                     // Create connection
                     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -28,7 +28,8 @@
                     die("Connection failed: " . $conn->connect_error);
                     }
 
-                    $sql = "SELECT id, name, email FROM users";
+                    $sql = "
+                    SELECT users.id, users.name, users.email, role_user.role_id AS role_ID, roles.display_name FROM users, role_user, roles WHERE users.id=role_user.user_id AND role_user.role_id=roles.id";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
@@ -38,6 +39,8 @@
                                 <th scope='col' class='px-6 py-3'>ID</th>
                                 <th scope='col' class='px-6 py-3'>Name</th>
                                 <th scope='col' class='px-6 py-3'>Email</th>
+                                <th scope='col' class='px-6 py-3'>Role ID</th>
+                                <th scope='col' class='px-6 py-3'>Role</th>
                                 <th scope='col' class='px-6 py-3'></th>
                             </tr>
                         </thead>";
@@ -47,6 +50,8 @@
                             <td class='px-6 py-4'>" . $row["id"] . "</td>
                             <td class='px-6 py-4'>" . $row["name"] . "</td>
                             <td class='px-6 py-4'>" . $row["email"] . "</td>
+                            <td class='px-6 py-4'>" . $row["role_ID"] . "</td>
+                            <td class='px-6 py-4'>" . $row["display_name"] . "</td>
                             <td class='px-6 py-4 text-right'><a href='#' class='font-medium text-blue-600 dark:text-blue-500 hover:underline'>Edit</a></td>
                         </tr>";
                         }
@@ -80,7 +85,7 @@
                         columnDefs: [{
                             orderable: false,
                             targets: 3
-                        }]
+                        }],
                     });
                 });
             </script>

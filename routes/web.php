@@ -21,14 +21,16 @@ Route::get('/', function () {
 
 #odaziva se ovaj /create
 Route::post('/createmoguci', function () {
-    moguci_datumi::create([
+    moguci_datumi::updateOrCreate([
         'datum' => request('datum')
     ]);
     return redirect('datumi')->with('success', 'Termin uspješno dodan!');
 });
 
 Route::post('/createzakazani', function () {
-    zakazani_datumi::create([
+    zakazani_datumi::updateOrCreate([
+        'name' => request('name'),
+        'email' => request('email'),
         'datum' => request('datum'),
         'broj' => request('broj'),
         'marka' => request('marka')

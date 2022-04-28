@@ -16,6 +16,8 @@ class ZakazaniDatumi extends Migration
         // Create table for zakazani datumi
         Schema::create('zakazani_datumi', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('email');
             $table->date('datum');
             $table->integer('broj');
             $table->string('marka');

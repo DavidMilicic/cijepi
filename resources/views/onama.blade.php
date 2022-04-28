@@ -8,7 +8,7 @@
 
     <!--Mi-->
     <section class="text-gray-600 body-font">
-        <div class="container px-5 py-24 mx-auto">
+        <div class="container px-5 py-6 mx-auto">
             <div class="flex flex-wrap -m-4">
                 <div class="p-4 md:w-1/3">
                     <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden bg-gray-100 text-center">
@@ -56,7 +56,7 @@
 
     <!--Informacije-->
     <section class="text-gray-600 body-font">
-        <div class="container px-5 py-24 mx-auto">
+        <div class="container px-5 py-6 mx-auto">
             <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6 bg-gray-100">
                 <div class="p-4 md:w-1/3 flex">
                     <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 mb-4 flex-shrink-0">
@@ -98,7 +98,7 @@
 
     <!-- Case Diagram -->
     <section class="text-gray-600 body-font">
-        <div class="container px-80 py-24 mx-auto">
+        <div class="container px-80 py-6 mx-auto">
         <img class="w-full object-cover object-center" src="{{ asset('images/CaseDiagram.jpg') }}">
         </div>
     </section>

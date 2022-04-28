@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserRoleSeeder::class);
         $this->call(MarkaVakcineSeeder::class);
         $this->call(ADUSeeder::class);
+        $this->call(UsersSeeder::class);
     }
 }

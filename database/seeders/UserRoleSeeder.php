@@ -21,5 +21,13 @@ class UserRoleSeeder extends Seeder
                 'user_type' => ('App\Models\User') #Ovo mora biti ovako da bi se mogao authenticateat user
             ]);
         }
+        #drugi for za ostalih 10 random usera
+        for ($i = 4; $i < 14; $i++) {
+            DB::table('role_user')->insert([
+                'role_id' => ('3'),
+                'user_id' => ($i),
+                'user_type' => ('App\Models\User') #Ovo mora biti ovako da bi se mogao authenticateat user
+            ]);
+        }
     }
 }

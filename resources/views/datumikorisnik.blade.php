@@ -6,11 +6,11 @@
     </x-slot>
 
     </br>
-
+    
     <section class="max-w-3xl px-6 py-4 mx-auto rounded-md shadow-md bg-gray-100">
 
         <!--povlaci podatke sa baze-->
-        <?php $mysql = new MySQLi('localhost', 'root', '', 'cijepi'); #localhost, root, pass, ime baze
+        <?php $mysql = new MySQLi($_ENV["DB_HOST"], $_ENV["DB_USERNAME"], $_ENV["DB_PASSWORD"], $_ENV["DB_DATABASE"]);
         $resultSet = $mysql->query("SELECT datum FROM moguci_datumi")
         ?>
         <form action="/createzakazani" method="post">
@@ -29,7 +29,16 @@
                     ?>
                 </select>
             </div>
+            <input name="name" type="hidden" value="<?php
 
+                                                    echo Auth::user()->name #ovo je crveno, ali radi
+
+                                                    ?>" />
+            <input name="email" type="hidden" value="<?php
+
+                                                    echo Auth::user()->email
+
+                                                    ?>" />
             <div class="container px-5 mx-auto">
 
                 <div class="text-center">
@@ -37,7 +46,7 @@
                     <div class="text-center">Odaberite dozu vakcine:</div>
 
                     <!--povlaci podatke sa baze-->
-                    <?php $mysql = new MySQLi('localhost', 'root', '', 'cijepi'); #localhost, root, pass, ime baze
+                    <?php $mysql = new MySQLi($_ENV["DB_HOST"], $_ENV["DB_USERNAME"], $_ENV["DB_PASSWORD"], $_ENV["DB_DATABASE"]);
                     $resultSet = $mysql->query("SELECT broj FROM broj_doze")
                     ?>
                     <select name="broj" class="text-center border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
@@ -55,7 +64,7 @@
                 <div class="text-center">
                     <div class="text-center">Odaberite vakcinu:</div>
 
-                    <?php $mysql = new MySQLi('localhost', 'root', '', 'cijepi');
+                    <?php $mysql = new MySQLi($_ENV["DB_HOST"], $_ENV["DB_USERNAME"], $_ENV["DB_PASSWORD"], $_ENV["DB_DATABASE"]);
                     $resultSet = $mysql->query("SELECT marka FROM marka_vakcine")
                     ?>
                     <select name="marka" class="text-center border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
@@ -67,9 +76,39 @@
                         ?>
                     </select>
                 </div>
-                <div class="text-center py-4">
+
+                @php
+                    $servername = $_ENV["DB_HOST"];
+                    $username = $_ENV["DB_USERNAME"];
+                    $password = $_ENV["DB_PASSWORD"];
+                    $dbname = $_ENV["DB_DATABASE"];
+
+                    // Create connection
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+                    // Check connection
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    $email = Auth::user()->email;
+                    $sql = "
+                    SELECT name, email, datum, marka FROM zakazani_datumi WHERE email='$email'";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0)
+                    {
+                    echo '<div class="text-center">Već ste zakazali termin!</div>';
+                    }
+                    else
+                    {
+                    echo '<div class="text-center py-4">
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm">Zakaži termin</button>
-                </div>
+                </div>';
+                    }
+                    $conn->close();
+                    @endphp
+
+
             </div>
             @if (\Session::has('success'))
             <div class="alert alert-success text-center">
