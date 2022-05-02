@@ -36,7 +36,7 @@ class DashboardController extends Controller
           } elseif (Auth::user()->hasRole('doktor')) { #ne dopusta da ide na /kontakt nego opet prikaze dashboard
                return view('doktordash');
           } elseif (Auth::user()->hasRole('admin')) {
-               return view('kontakt');
+               return view('kontaktadmin');
           }
      }
 }

@@ -22,6 +22,9 @@ class ZakazaniDatumi extends Migration
             $table->integer('broj');
             $table->string('marka');
             $table->timestamps();
+
+            $table->foreign('datum')->references('datum')->on('moguci_datumi')
+            ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

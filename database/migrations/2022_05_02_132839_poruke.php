@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MoguciDatumi extends Migration
+class Poruke extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class MoguciDatumi extends Migration
      */
     public function up()
     {
-        // Create table for moguci datumi
-        Schema::create('moguci_datumi', function (Blueprint $table) {
+        Schema::create('poruke', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('datum')->unique();
+            $table->string('name');
+            $table->string('email');
+            $table->string('poruka');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class MoguciDatumi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('moguci_datumi');
+        Schema::dropIfExists('poruke');
     }
 }

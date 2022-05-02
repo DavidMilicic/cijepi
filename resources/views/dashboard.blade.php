@@ -15,6 +15,7 @@
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg>Tablica korisnika:</div>
                 <div>
+                    
                     @php
                     $servername = $_ENV["DB_HOST"];
                     $username = $_ENV["DB_USERNAME"];
@@ -29,7 +30,7 @@
                     }
 
                     $sql = "
-                    SELECT users.id, users.name, users.email, role_user.role_id AS role_ID, roles.display_name FROM users, role_user, roles WHERE users.id=role_user.user_id AND role_user.role_id=roles.id";
+                    SELECT users.id, users.name, users.email, role_user.role_id FROM users RIGHT JOIN role_user ON users.id = role_user.user_id";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
@@ -40,19 +41,23 @@
                                 <th scope='col' class='px-6 py-3'>Name</th>
                                 <th scope='col' class='px-6 py-3'>Email</th>
                                 <th scope='col' class='px-6 py-3'>Role ID</th>
-                                <th scope='col' class='px-6 py-3'>Role</th>
                                 <th scope='col' class='px-6 py-3'></th>
                             </tr>
                         </thead>";
                         // output data of each row
                         while ($row = $result->fetch_assoc()) {
+                        $id = $row["id"];
                         echo "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
                             <td class='px-6 py-4'>" . $row["id"] . "</td>
                             <td class='px-6 py-4'>" . $row["name"] . "</td>
                             <td class='px-6 py-4'>" . $row["email"] . "</td>
-                            <td class='px-6 py-4'>" . $row["role_ID"] . "</td>
-                            <td class='px-6 py-4'>" . $row["display_name"] . "</td>
-                            <td class='px-6 py-4 text-right'><a href='#' class='font-medium text-blue-600 dark:text-blue-500 hover:underline'>Edit</a></td>
+                            <td class='px-6 py-4'>" . $row["role_id"] . "</td>
+                            <td class='px-6 py-4 text-right'>
+                                <form action='/izbrisikorisnika' method='get'>
+                                    <input name='id' type='hidden' value='" .$id. "' />
+                                    <button class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm'>Izbriši korisnika</button>
+                                </form>
+                            </td>
                         </tr>";
                         }
                         echo "
@@ -62,10 +67,18 @@
                     }
                     $conn->close();
                     @endphp
+                    @if (\Session::has('success'))
+                        <div class="alert bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center">
+                            <ul>
+                                <li>{!! \Session::get('success') !!}</li>
+                            </ul>
+                        </div>
+                        @endif
                 </div>
             </div>
         </div>
         <div class="py-6">
+
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

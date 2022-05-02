@@ -6,7 +6,7 @@
     </x-slot>
 
     </br>
-    
+
     <section class="max-w-3xl px-6 py-4 mx-auto rounded-md shadow-md bg-gray-100">
 
         <!--povlaci podatke sa baze-->
@@ -31,14 +31,14 @@
             </div>
             <input name="name" type="hidden" value="<?php
 
-                                                    echo Auth::user()->name #ovo je crveno, ali radi
+                                                    echo Auth::user()->name #crveno, ali radi
 
                                                     ?>" />
             <input name="email" type="hidden" value="<?php
 
-                                                    echo Auth::user()->email
+                                                        echo Auth::user()->email
 
-                                                    ?>" />
+                                                        ?>" />
             <div class="container px-5 mx-auto">
 
                 <div class="text-center">
@@ -78,45 +78,45 @@
                 </div>
 
                 @php
-                    $servername = $_ENV["DB_HOST"];
-                    $username = $_ENV["DB_USERNAME"];
-                    $password = $_ENV["DB_PASSWORD"];
-                    $dbname = $_ENV["DB_DATABASE"];
+                $servername = $_ENV["DB_HOST"];
+                $username = $_ENV["DB_USERNAME"];
+                $password = $_ENV["DB_PASSWORD"];
+                $dbname = $_ENV["DB_DATABASE"];
 
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-                    // Check connection
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    }
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+                }
 
-                    $email = Auth::user()->email;
-                    $sql = "
-                    SELECT name, email, datum, marka FROM zakazani_datumi WHERE email='$email'";
-                    $result = $conn->query($sql);
+                $email = Auth::user()->email;
+                $sql = "
+                SELECT name, email, datum, marka FROM zakazani_datumi WHERE email='$email'";
+                $result = $conn->query($sql);
 
-                    if ($result->num_rows > 0)
-                    {
-                    echo '<div class="text-center">Već ste zakazali termin!</div>';
-                    }
-                    else
-                    {
-                    echo '<div class="text-center py-4">
+                if ($result->num_rows > 0)
+                {
+                echo '<div class="text-center">Pogledajte profil da vidite svoj zakazani termin!</div>';
+                }
+                else
+                {
+                echo '<div class="text-center py-4">
                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm">Zakaži termin</button>
                 </div>';
-                    }
-                    $conn->close();
-                    @endphp
+                }
+                $conn->close();
+                @endphp
 
 
             </div>
             @if (\Session::has('success'))
-            <div class="alert alert-success text-center">
-                <ul>
-                    <li>{!! \Session::get('success') !!}</li>
-                </ul>
-            </div>
-            @endif
+                    <div class="alert bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center">
+                        <ul>
+                            <li>{!! \Session::get('success') !!}</li>
+                        </ul>
+                    </div>
+                    @endif
         </form>
     </section>
     </br>

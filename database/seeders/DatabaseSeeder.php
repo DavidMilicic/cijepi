@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(LaratrustSeeder::class); #ovo poziva seedere
         $this->call(BrojDozeSeeder::class);
-        $this->call(UserRoleSeeder::class);
         $this->call(MarkaVakcineSeeder::class);
         $this->call(ADUSeeder::class);
         $this->call(UsersSeeder::class);
+        $this->call(UserRoleSeeder::class);
     }
 }

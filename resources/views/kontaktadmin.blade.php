@@ -57,7 +57,7 @@
                 <div class="w-full mt-4">
                     <label class="block mb-2 text-sm font-medium text-black">Message</label>
 
-                    <textarea required name="poruka"class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-400 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"></textarea>
+                    <textarea required name="poruka" class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-400 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"></textarea>
                 </div>
 
                 <div class="flex justify-center mt-6">
@@ -66,5 +66,21 @@
             </div>
         </form>
     </section>
-    
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <?php $mysql = new MySQLi($_ENV["DB_HOST"], $_ENV["DB_USERNAME"], $_ENV["DB_PASSWORD"], $_ENV["DB_DATABASE"]);
+                $resultSet = $mysql->query("SELECT name, email, poruka FROM poruke")
+                ?>
+                <?php
+                while ($rows = $resultSet->fetch_assoc()) {
+                    $name = $rows["name"];
+                    $email = $rows["email"];
+                    $poruka = $rows["poruka"];
+                    echo "<p>$name $email $poruka</p>";
+                }
+                ?>
+            </div>
+        </div>
+    </div>
 </x-app-layout>
