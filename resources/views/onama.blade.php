@@ -77,7 +77,7 @@
                     </div>
                     <div class="flex-grow pl-6">
                         <h2 class="text-gray-900 text-lg title-font font-bold mb-2">Tehnologije</h2>
-                        <p class="leading-relaxed text-base text-black">Koristit ćemo tehnologije kao: Laravel, Tailwind css i javascript, MySQL.</p>
+                        <p class="leading-relaxed text-base text-black">Koristit ćemo tehnologije: Laravel, Laravel breeze, Tailwind CSS, Laratrust, Datatables, Jquery, MySQL.</p>
                     </div>
                 </div>
                 <div class="p-4 md:w-1/3 flex">
