@@ -110,13 +110,6 @@
 
 
             </div>
-            @if (\Session::has('success'))
-                    <div class="alert bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center">
-                        <ul>
-                            <li>{!! \Session::get('success') !!}</li>
-                        </ul>
-                    </div>
-                    @endif
         </form>
     </section>
     </br>

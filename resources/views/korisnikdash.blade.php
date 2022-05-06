@@ -15,14 +15,38 @@
 
                     <p class="py-2">Želite promijeniti šifru? <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm" href="#editPassword" rel="modal:open">Promijenite šifru</a></p>
 
-                    @if (\Session::has('success'))
+                    @if (\Session::has('successIme'))
                     <div class="alert bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center">
                         <ul>
-                            <li>{!! \Session::get('success') !!}</li>
+                            <li>{!! \Session::get('successIme') !!}</li>
                         </ul>
                     </div>
                     @endif
 
+                    @if (\Session::has('successSifra'))
+                    <div
+                        class="alert bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center">
+                        <ul>
+                            <li>{!! \Session::get('successSifra') !!}</li>
+                        </ul>
+                    </div>
+                    @endif
+
+                    @if (\Session::has('successPoruka'))
+                    <div
+                        class="alert bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center">
+                        <ul>
+                            <li>{!! \Session::get('successPoruka') !!}</li>
+                        </ul>
+                    </div>
+                    @endif
+                                @if (\Session::has('successZakazani'))
+                    <div class="alert bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center">
+                        <ul>
+                            <li>{!! \Session::get('successZakazani') !!}</li>
+                        </ul>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>

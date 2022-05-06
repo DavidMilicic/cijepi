@@ -12,6 +12,7 @@
             <p class="text-center text-3xl">Odredite mogući datum prijave.</p>
         </div>
 
+            <!--Date selector - ovaj action /create salje na web route-->
         <div class="container px-5 py-4 mx-auto">
             <form action="/createmoguci" method="post" autocomplete="off">
                 <div class="relative">
@@ -23,14 +24,11 @@
                 </div>
             </form>
 
-            @if (\Session::has('success'))
+            @if (\Session::has('successMoguci'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center" role="alert">
-                <strong class="font-bold">{!! \Session::get('success') !!}</strong>
+                <strong class="font-bold">{!! \Session::get('successMoguci') !!}</strong>
             </div>
             @endif
-            
-            <!--Date selector - ovaj action /create salje na web route-->
-
 
             <!--Za vec dodane datume-->
             <?php $mysql = new MySQLi($_ENV["DB_HOST"], $_ENV["DB_USERNAME"], $_ENV["DB_PASSWORD"], $_ENV["DB_DATABASE"]);

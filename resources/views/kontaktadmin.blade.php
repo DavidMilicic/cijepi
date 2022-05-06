@@ -5,82 +5,86 @@
         </h2>
     </x-slot>
 
-    </br>
-
-    <section class="w-full max-w-2xl px-6 py-4 mx-auto rounded-md shadow-md bg-gray-100">
-        <h2 class="text-3xl font-semibold text-center text-gray-800">Kontaktirajte nas</h2>
-        <p class="mt-3 text-center text-gray-600 text-black">Pomoći ćemo vam!</p>
-
-        <div class="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 md:grid-cols-3">
-            <a href="#" class="flex flex-col items-center px-4 py-3 text-gray-700 transition-colors duration-200 transform rounded-md text-black hover:bg-blue-200 hover:bg-blue-500">
-                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                </svg>
-
-                <span class="mt-2">Mostar</span>
-            </a>
-
-            <a href="#" class="flex flex-col items-center px-4 py-3 text-gray-700 transition-colors duration-200 transform rounded-md text-black hover:bg-blue-200 hover:bg-blue-500">
-                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-
-                <span class="mt-2">+63690420</span>
-            </a>
-
-            <a href="#" class="flex flex-col items-center px-4 py-3 text-gray-700 transition-colors duration-200 transform rounded-md text-black hover:bg-blue-200 hover:bg-blue-500">
-                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-
-                <span class="mt-2">cijepisekontakt@gmail.com</span>
-            </a>
-        </div>
-        <form action="/posaljiporuku" method="post">
-            @csrf
-            <div class="mt-6 ">
-                <div class="items-center -mx-2 md:flex">
-                    <div class="w-full mx-2">
-                        <label class="block mb-2 text-sm font-medium text-black">Name</label>
-
-                        <input required name="name" class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" type="text">
-                    </div>
-
-                    <div class="w-full mx-2 mt-4 md:mt-0">
-                        <label class="block mb-2 text-sm font-medium text-black">E-mail</label>
-
-                        <input required name="email" class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" type="email">
-                    </div>
-                </div>
-
-                <div class="w-full mt-4">
-                    <label class="block mb-2 text-sm font-medium text-black">Message</label>
-
-                    <textarea required name="poruka" class="block w-full h-40 px-4 py-2 text-gray-700 bg-white border rounded-md bg-gray-800 text-gray-300 border-gray-600 focus:border-blue-400 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"></textarea>
-                </div>
-
-                <div class="flex justify-center mt-6">
-                    <button type="submit" class="px-4 py-2 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Send Message</button>
-                </div>
-            </div>
-        </form>
-    </section>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <?php $mysql = new MySQLi($_ENV["DB_HOST"], $_ENV["DB_USERNAME"], $_ENV["DB_PASSWORD"], $_ENV["DB_DATABASE"]);
-                $resultSet = $mysql->query("SELECT name, email, poruka FROM poruke")
-                ?>
-                <?php
-                while ($rows = $resultSet->fetch_assoc()) {
-                    $name = $rows["name"];
-                    $email = $rows["email"];
-                    $poruka = $rows["poruka"];
-                    echo "<p>$name $email $poruka</p>";
+                @php
+                $servername = $_ENV["DB_HOST"];
+                $username = $_ENV["DB_USERNAME"];
+                $password = $_ENV["DB_PASSWORD"];
+                $dbname = $_ENV["DB_DATABASE"];
+
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
                 }
-                ?>
-            </div>
+
+                $email = Auth::user()->email;
+                $sql = "
+                SELECT id, name, email, poruka FROM poruke";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                echo '<section class="text-gray-600 body-font">
+                    <div class="container px-5 py-6 mx-auto">
+                        <div class="flex flex-wrap -m-4">';
+                            // output data of each row
+                            while ($row = $result->fetch_assoc()) {
+                            echo '<div class="p-4 md:w-1/3">
+                                <div
+                                    class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden bg-gray-100 text-center">
+                                    <svg class="mx-auto h-12 w-12 text-blue-500" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" />
+                                        <rect x="3" y="5" width="18" height="14" rx="2" />
+                                        <polyline points="3 7 12 13 21 7" />
+                                    </svg>
+                                    <div class="p-6">
+                                        <h1 class="title-font text-xl font-bold text-gray-900 mb-3 underline">Ime: '.
+                                            $row["name"]. '</h1>
+                                        <h2 class="title-font text-xl font-bold text-gray-900 mb-3 underline">Email: '.
+                                            $row["email"]. '</h2>
+                                        <p class="leading-relaxed mb-3 text-black">Poruka: '. $row["poruka"] .'</p>
+
+                                        <form action="/izbrisiporuku" method="get">
+                                            <input name="id" type="hidden" value="' .$row["id"]. '" />
+                                            <button
+                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm">Izbriši
+                                                poruku</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>';
+                            }
+                            echo "
+                </section </div>
+            </div>";
+            } else {
+            echo "<div class='text-center text-xl'>Ovdje će se prikazati poruke.</a></div>";
+            }
+            $conn->close();
+            @endphp
+                @if (\Session::has('successPorukaDel'))
+                <div
+                    class="alert bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center">
+                    <ul>
+                        <li>{!! \Session::get('successPorukaDel') !!}</li>
+                    </ul>
+                </div>
+                @endif
         </div>
     </div>
+    <script>
+        $('#demo').pagination({
+        dataSource: [1, 2, 3, 4, 5, 6, 7, ... , 195],
+        callback: function(data, pagination) {
+            // template method of yourself
+            var html = template(data);
+            dataContainer.html(html);
+        }
+    })
+    </script>
 </x-app-layout>
