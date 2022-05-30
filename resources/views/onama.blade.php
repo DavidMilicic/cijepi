@@ -12,7 +12,7 @@
             <div class="flex flex-wrap -m-4">
                 <div class="p-4 md:w-1/3">
                     <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden bg-gray-100 text-center">
-                        <img class="w-full object-cover object-center" src="{{ asset('images/David.png') }}">
+                        <img class="w-full object-cover object-center" src="images/david.png">
                         <div class="p-6">
                             <h1 class="title-font text-xl font-bold text-gray-900 mb-3 underline">David</h1>
                             <p class="leading-relaxed mb-3 text-black">Pozdrav, ja sam David Miličić. Imam 21 godinu i živim u Ugljari. Student sam treće godine Informatike u Orašju. Slobodno vrijeme provodim igrajući igre i družeći se sa prijateljima.</p>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="p-4 md:w-1/3">
                     <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden bg-gray-100 text-center">
-                        <img class="w-full object-cover object-center" src="{{ asset('images/Kruno.png') }}">
+                        <img class="w-full object-cover object-center" src="images/kruno.png">
                         <div class="p-6">
                             <h1 class="title-font text-xl font-bold text-gray-900 mb-3 underline">Kruno</h1>
                             <p class="leading-relaxed mb-3 text-black">Pozdrav, ja sam Krunoslav Knežević. Imam 22 godine i živim u Jenjiću. Student sam treće godine Informatike u Orašju. U slobodno vrijeme igram nogomet,igre i čitam knjige.</p>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="p-4 md:w-1/3">
                     <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden bg-gray-100 text-center">
-                        <img class="w-full object-cover object-center" src="{{ asset('images/Mario.png') }}">
+                        <img class="w-full object-cover object-center" src="images/mario.png">
                         <div class="p-6">
                             <h1 class="title-font text-xl font-bold text-gray-900 mb-3 underline">Mario</h1>
                             <p class="leading-relaxed mb-3 text-black">Pozdrav, ja sam Mario Nedić. Imam 21 godinu i živim u Tolisi. Trenutno sam student treće godine Informatike u Orašju. Uz faks, slobodno vrijeme provodim s prijateljima, s bratom se bavim izradom namještaja te vikednom radim u diskoteci. 😄</p>
